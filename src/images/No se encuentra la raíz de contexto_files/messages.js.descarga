@@ -1,0 +1,28 @@
+var messages = {
+    WELCOME: "Le damos al bienvenida a Liberty",
+    WEBSPHERE_LIBERTY_LOGO: "Logotipo de WebSphere Liberty",
+    WELCOME_SECTION: "Sección de bienvenida",
+    WELCOME_SECTION_CONTENT: "Contenido de la sección de bienvenida",
+    WEBSPHERE_APPSERVER: "WebSphere Application Server Beta",
+    HOW_TO_SETUP_ADMIN_CENTER: "Cómo configurar el Centro de administración",
+    OPEN_ADMIN_CENTER: "Abrir el Centro de administración",
+    ADDITIONAL_RESOURCES: "Recursos adicionales",
+    EXTERNAL_RESOURCES: "Recursos externos",
+    WASDEV: "Comunidad WASdev",
+    LIBERTY_DOC: "Documentación de Liberty",
+    WASDEV_FORUM: "Foro WASdev",
+    HEADER_UPDATE_AVAILABLE: "Actualización disponible: ",
+    HEADER_DOWNLOAD_LINK: "Pulse para descargar {0}", // Product name
+    HEADER_UPDATE_AVAILABLE_DOWNLOAD_LINK: "Actualización disponible. Pulse para descargar {0}", // Product name
+    COPYRIGHT: "Copyright",
+    IBM_LOGO: "Logotipo de IBM",
+    IBM_LICENSED: "Materiales bajo licencia - Propiedad de IBM © Copyright IBM Corp. 1997, 2019. Reservados todos los derechos. IBM y el logotipo de IBM son marcas comerciales o marcas registradas de International Business Machines Corp., registradas en muchas jurisdicciones de todo el mundo. Otros nombres de productos y servicios pueden ser marcas registradas de IBM o de otras empresas. Encontrará una lista actualizada de las marcas registradas de IBM en la web, en {0} ", // COPYRIGHT_URL
+    COPYRIGHT_URL: "Información de copyright y marcas registradas",
+    CONTEXT_ROOT_NOT_FOUND: "No se encuentra la raíz de contexto",
+    UPDATE_BANNER_CLOSE_BUTTON: "Cerrar banner",
+    UPDATE_BANNER_SECTION: "Actualizar sección de banner",
+    UPDATE_BANNER_SECTION_CONTENT: "Actualizar contenido de la sección de banner",
+    BUILT_ON: "Compilada el ",
+    LINKS: "Enlaces: "
+};
+
