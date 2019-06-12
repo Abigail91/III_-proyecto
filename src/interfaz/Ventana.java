@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import componentes.Tablero;
+
 
 public class Ventana extends JFrame implements ActionListener{
 	JLabel vent;
@@ -49,6 +51,7 @@ public class Ventana extends JFrame implements ActionListener{
 	add(vent);
 	setVisible(true);}
 	
+	
 	public void CloseFrame(){
 	    super.dispose();
 	}
@@ -57,7 +60,7 @@ public class Ventana extends JFrame implements ActionListener{
 	 
  		
 public static void main(String[] args) {
-	
+	Tablero.matriz();
 	new Ventana();
 }
 
@@ -68,6 +71,8 @@ public static void main(String[] args) {
 public void actionPerformed(ActionEvent arg0) {
 	this.setVisible(false);
 	new Mapa();
+	
+	
 		
 	
 }
