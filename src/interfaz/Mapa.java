@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import componentes.Avion;
 import componentes.Bala;
+import componentes.PortaAvion;
 import componentes.Tablero;
 import estructurasDeDatos.ListaEnlazadaSimple;
 
@@ -57,14 +58,15 @@ public class Mapa extends JFrame{
 			System.out.println(pos_X);
 			System.out.println(pos_y);
 			nodo.setBounds(pos_X, pos_y, 32, 32);
+			
 			System.out.println();
 			vent.add(nodo);
-			nodos.addLast( pos_X,pos_y,value);
+			nodos.addLast(new PortaAvion(pos_X,pos_y,value,nodo));
 			
 		}
 		setVisible(true);
 		Tablero.matriz();
-		nodos.print();
+		System.out.println(nodos.getLen());
 	}
 		
 }
