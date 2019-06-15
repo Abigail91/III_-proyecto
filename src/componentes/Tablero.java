@@ -1,32 +1,45 @@
 package componentes;
 
 import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
 
-public class Tablero extends Frame{
-	private static int matriz[][] = new int[20][20];
-	private static int FILAS = 20;
-	private static int COLUMNAS = 20;
-	
-	
-	public static void matriz() {
-		for(int i= 0; i<FILAS;i++) {
-			for(int j= 0; j<COLUMNAS;j++) {
-				matriz[i][j] = 0;
-				
-		}
-			}
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import interfaz.Mapa;
+
+public class Tablero {
+	public static int matriz[][] = {
+			{0,0,0,0,0,0,0,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,1,1,1,1,1,0,0,1,1,1,0,0,0,0,0,0,2,0,2,2,2,2,2,0,0,0},
+			{1,1,1,1,1,1,1,1,1,0,1,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
+			{0,0,1,1,1,1,1,1,1,0,1,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,2},
+			{0,0,0,1,1,1,1,1,1,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0},
+			{0,0,0,1,1,1,1,1,1,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0},
+			{0,0,0,0,1,1,1,1,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0},
+			{0,0,0,0,0,1,1,0,0,0,0,0,0,2,2,2,2,2,2,0,0,2,2,2,0,0,0,0,0},
+			{0,0,0,0,0,0,0,1,1,0,0,0,0,2,2,2,2,2,0,0,0,0,2,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,2,2,2,0,0,0,0,0,0,3,3,3,0,0},
+			{0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,2,2,2,0,0,0,0,0,0,3,3,3,3,0},
+			
+			
+			};
 	
 
-}
-	public  void  dibujarMatriz() {
-		for(int i= 0; i<FILAS;i++) {
-			for(int j= 0; j<COLUMNAS;j++) {
-				getGraphics().setColor(Color.RED);
-					getGraphics().drawLine(50, 50, 500, 500);
+		public static void matriz() {
+			for(int i= 0; i<13;i++) {
+			for(int j= 0; j<29;j++) {
+			
+					System.out.print(matriz[i][j] +",");
 					
 			}
-		}
+				System.out.println();
+				}
+		
+
 	}
+
+	
+
 }

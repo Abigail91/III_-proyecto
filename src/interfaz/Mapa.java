@@ -13,10 +13,13 @@ import javax.swing.JPanel;
 
 import componentes.Avion;
 import componentes.Bala;
+import componentes.Tablero;
+import estructurasDeDatos.ListaEnlazadaSimple;
 
 public class Mapa extends JFrame{
-	JLabel vent;
-	
+	public static JLabel vent;
+	JLabel nodo;
+	ListaEnlazadaSimple nodos = new ListaEnlazadaSimple();
 	public Mapa()  {
 		this.getContentPane().setBackground(Color.DARK_GRAY);
 		setSize(1000,800);
@@ -35,10 +38,41 @@ public class Mapa extends JFrame{
 		ImageIcon icono = new ImageIcon("src/images/icono.jpg");
 		setIconImage(icono.getImage());
 		add(vent,2);
-		setVisible(true);
+		for(int i = 0; i<10;i++) {
+			int fila = (int) (Math.random() * 12);
+			int columna = (int) (Math.random() *28 );
+			System.out.println(fila);
+			System.out.println(columna);
+			
+			int value = Tablero.matriz[fila][columna];
+			
+			if(value==0) {
+				nodo = new JLabel(new ImageIcon("src/images/portaAviones.png"));
+			}else {
+				nodo = new JLabel(new ImageIcon("src/images/aeropuerto.png"));
+				
+			}
+			int pos_X = (columna*32)+10;
+			int pos_y = (fila*32)+72;
+			System.out.println(pos_X);
+			System.out.println(pos_y);
+			nodo.setBounds(pos_X, pos_y, 32, 32);
+			System.out.println();
+			vent.add(nodo);
+			nodos.addLast( pos_X,pos_y,value);
+			
 		}
+		setVisible(true);
+		Tablero.matriz();
+		nodos.print();
+	}
 		
 }
+	
+	
+	
+		
+
 
 class ThreadDraw extends Thread implements ActionListener{
 	Mapa frame;
@@ -46,6 +80,7 @@ class ThreadDraw extends Thread implements ActionListener{
 	Bala bullet = null;
 	JButton fire = new JButton();
 	int cont=0;
+
 	
 	public ThreadDraw(Mapa frame) {
 		this.frame = frame;

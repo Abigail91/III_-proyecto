@@ -9,11 +9,7 @@ public class Graph {
     private List<Vertex> vertexes;
     private List<Edge> edges;
 
-    /**
-     * Constructor de la clase grafo
-     * @param vertexes
-     * @param edges
-     */
+
     public Graph(List<Vertex> vertexes, List<Edge> edges) {
         this.vertexes = vertexes;
         this.edges = edges;

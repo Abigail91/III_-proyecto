@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import componentes.Tablero;
 
 
 public class Ventana extends JFrame implements ActionListener{
@@ -38,6 +37,7 @@ public class Ventana extends JFrame implements ActionListener{
 	bot.setText("Salir");
 	bot.setBounds(250,350, 200, 60);
 	
+	
 	bot.addActionListener(new ActionListener() {
 	
 		@Override
@@ -60,7 +60,6 @@ public class Ventana extends JFrame implements ActionListener{
 	 
  		
 public static void main(String[] args) {
-	Tablero.matriz();
 	new Ventana();
 }
 
