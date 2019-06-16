@@ -2,25 +2,32 @@
 package componentes;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
 import estructurasDeDatos.ListaEnlazadaSimple;
+import grafos.Vertex;
 import interfaz.Mapa;
 
 public class Avion extends JPanel {
-	Image airplane = Toolkit.getDefaultToolkit().getImage("src/images/airplane.png");
+	Image airplane = Toolkit.getDefaultToolkit().getImage("src/images/avion.png");
+
 	Thread move;
-	int xpos = (int) (Math.random() * 900);
-	int ypos = (int) (Math.random() * 700);
+	int index =(int) (Math.random() * 10);
+	int xpos = (int) Mapa.grafo.getVertexes().get(9).getX();
+	int ypos = (int) Mapa.grafo.getVertexes().get(9).getY();
 	Rectangle rect;
+	public ArrayList<Vertex> ruta = new ArrayList<Vertex>();
+	
 	
 	public Avion() {
-		setBounds(xpos,ypos,150,35);
+		setBounds(xpos,ypos,35,35);
 		setOpaque(false);
 		rect = new Rectangle();
-		rect.setBounds(xpos, ypos, 150, 35);
+		rect.setBounds(xpos, ypos,35, 35);
 	}
 	
 	public void paint(Graphics g) {
@@ -82,10 +89,10 @@ class AirplaneMove extends Thread{
 			if(airplane.getYpos()>y) {
 				airplane.setYpos(airplane.getYpos()-1);
 			}
-			airplane.setBounds(airplane.getXpos(),airplane.getYpos(),150,35);
-			airplane.getRect().setBounds(airplane.getXpos(), airplane.getYpos(), 150, 35);
+			airplane.setBounds(airplane.getXpos(),airplane.getYpos(),35,35);
+			airplane.getRect().setBounds(airplane.getXpos(), airplane.getYpos(), 35, 35);
 			try {
-				AirplaneMove.sleep(1);
+				AirplaneMove.sleep(3);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

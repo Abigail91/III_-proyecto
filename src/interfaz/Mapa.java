@@ -11,20 +11,28 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import componentes.Avion;
 import componentes.Bala;
 import componentes.PortaAvion;
 import componentes.Tablero;
 import estructurasDeDatos.ListaEnlazadaSimple;
+import estructurasDeDatos.Nodo;
+import grafos.DijkstraAlgorithm;
 import grafos.Graph;
+import grafos.Vertex;
 
 public class Mapa extends JFrame{
 	public static JLabel vent;
 	JLabel nodo;
 	public static ArrayList<PortaAvion> nodos = new ArrayList<PortaAvion>();
 	public static ListaEnlazadaSimple <Avion> airplaneList = new ListaEnlazadaSimple <Avion>();
+	
 	ListaEnlazadaSimple <String> rutaList;
+	ArrayList ruta = new ArrayList();
+	public static Graph grafo;
+	public static DijkstraAlgorithm dijkstra;
 
 	public Mapa()  {
 		this.getContentPane().setBackground(Color.DARK_GRAY);
@@ -44,6 +52,7 @@ public class Mapa extends JFrame{
 		ImageIcon icono = new ImageIcon("src/images/icono.jpg");
 		setIconImage(icono.getImage());
 		add(vent);
+		
 		for(int i = 0; i<10;i++) {
 			int fila = (int) (Math.random() * 12);
 			int columna = (int) (Math.random() *28 );
@@ -61,15 +70,18 @@ public class Mapa extends JFrame{
 			}
 			int pos_X = (columna*32)+10;
 			int pos_y = (fila*32)+72;
+			JTextArea vertex = new JTextArea(""+i);
+			vertex.setBounds(pos_X,pos_y +45,15,15);
 			nodo.setBounds(pos_X, pos_y, 32, 32);
 			
-			
+			vent.add(vertex);
 			vent.add(nodo);
 			nodos.add(new PortaAvion(pos_X,pos_y,value,nodo));
 			
 		}
-		Graph grafo = new Graph();
+		grafo = new Graph();
 		grafo.generateRandomPlaces();
+		dijkstra = new DijkstraAlgorithm(grafo);
 		System.out.println(grafo);
 		Thread airplaneThread = new AirplaneThread(this);
 		airplaneThread.start();
@@ -142,6 +154,8 @@ class ThreadDraw extends Thread implements ActionListener{
 
 class AirplaneThread extends Thread{
 	Mapa frame;
+	Graph grafo = Mapa.grafo;
+	DijkstraAlgorithm dijkstra = Mapa.dijkstra;
 		
 	public AirplaneThread(Mapa frame) {
 		this.frame = frame;
@@ -151,17 +165,38 @@ class AirplaneThread extends Thread{
 		int x;
 		int y;
 		while(true) {
-			x = (int) (Math.random() * 900);
-			y = (int) (Math.random() * 700);
 			Avion airplane = new Avion();
 			Mapa.airplaneList.addLast(airplane);
+			int random1 = (int) (Math.random() * 9);
+			int random2 =(int) (Math.random() * 9) ;
+			Vertex inicio = dijkstra.getNodes().get(random1);
+			Vertex fin = dijkstra.getNodes().get(random2);
+			dijkstra.execute(inicio);
+			if(dijkstra.getPath(fin)!=null) {
+			airplane.ruta = dijkstra.getPath(fin);
+			}else {
+			airplane.ruta = (ArrayList<Vertex>) dijkstra.getNodes();
+			}
+			System.out.println("Ruta: "+airplane.ruta);
 			frame.add(airplane,0);
-			airplane.move(x,y);
+			Nodo<Avion> head = Mapa.airplaneList.getFirst();
+			while (head!=null) {
+			
+			for(int i = 0; i< head.getData().ruta.size();i++) {
+			x = (int) head.getData().ruta.get(i).getX();
+			y =  (int) head.getData().ruta.get(i).getY();
+			
+			head.getData().move(x,y);
+			
+			
+			
 			try {
 				AirplaneThread.sleep(4000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}}
+			head = head.getNext();
+		}
 		}
 	}
 }                                                                                                                                 

@@ -137,8 +137,8 @@ public class DijkstraAlgorithm {
      * @param target
      * @return null si no hay camino, la lista si lo hay
      */
-    public LinkedList<Vertex> getPath(Vertex target) {
-        LinkedList<Vertex> path = new LinkedList<Vertex>();
+    public ArrayList<Vertex> getPath(Vertex target) {
+        ArrayList<Vertex> path = new ArrayList<Vertex>();
         Vertex step = target;
         // check if a path exists
         if (predecessors.get(step) == null) {
@@ -150,8 +150,49 @@ public class DijkstraAlgorithm {
             path.add(step);
         }
         // Put it into the correct order
+      
         Collections.reverse(path);
         return path;
     }
+
+	public Set<Vertex> getSettledNodes() {
+		return settledNodes;
+	}
+
+	public void setSettledNodes(Set<Vertex> settledNodes) {
+		this.settledNodes = settledNodes;
+	}
+
+	public Set<Vertex> getUnSettledNodes() {
+		return unSettledNodes;
+	}
+
+	public void setUnSettledNodes(Set<Vertex> unSettledNodes) {
+		this.unSettledNodes = unSettledNodes;
+	}
+
+	public Map<Vertex, Vertex> getPredecessors() {
+		return predecessors;
+	}
+
+	public void setPredecessors(Map<Vertex, Vertex> predecessors) {
+		this.predecessors = predecessors;
+	}
+
+	public Map<Vertex, Integer> getDistance() {
+		return distance;
+	}
+
+	public void setDistance(Map<Vertex, Integer> distance) {
+		this.distance = distance;
+	}
+
+	public List<Vertex> getNodes() {
+		return nodes;
+	}
+
+	public List<Edge> getEdges() {
+		return edges;
+	}
 
 }

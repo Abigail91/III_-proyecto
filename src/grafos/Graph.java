@@ -50,9 +50,9 @@ public class Graph {
     	Vertex Salida = new Vertex("Salida", "Node_Salida: " ,10, 72,1);
     	vertexes.add(Salida);
     	
-    	for(int i=0; i<10; i++) {
-    		int random = (int) (Math.random() *10);
-			int random2 = (int) (Math.random() *10 );
+    	for(int i=0; i<20; i++) {
+    		int random = (int) (Math.random() *9);
+			int random2 = (int) (Math.random() *9 );
     		addLane("Edge_"+ i, random, random2, vertexes,edges);
     	}
     	
