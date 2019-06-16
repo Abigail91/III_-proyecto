@@ -1,25 +1,29 @@
 package grafos;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
+
+import interfaz.Mapa;
 
 public class Graph {
-    private List<Vertex> vertexes;
-    private List<Edge> edges;
+    private ArrayList<Vertex> vertexes;
+    private ArrayList<Edge> edges;
 
 
-    public Graph(List<Vertex> vertexes, List<Edge> edges) {
+    public Graph(ArrayList<Vertex> vertexes, ArrayList<Edge> edges) {
         this.vertexes = vertexes;
         this.edges = edges;
     }
 
-    /**
+    public Graph() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
      * Obtiene los vértices del grafo
      * @return
      */
-    public List<Vertex> getVertexes() {
+    public ArrayList<Vertex> getVertexes() {
         return vertexes;
     }
     
@@ -27,58 +31,29 @@ public class Graph {
      * Obtiene las aristas del grafo
      * @return
      */
-    public List<Edge> getEdges() {
+    public ArrayList<Edge> getEdges() {
         return edges;
     }
     
-    /**
-     * Genera posiciones random a lo largo de Cartago
-     * @return
-     */
-    public static double[] generateRandomPos() {
-        double[] resultado = new double[2];
-
-        Random randomlat = new Random();
-        Random randomlng = new Random();
-
-        double lat = 9.832350 + (9.880570 - 9.832350) * randomlat.nextDouble();
-        double lng = -83.963226 + (-83.893785 - -83.963226) * randomlng.nextDouble();
-
-        resultado[0] = lat;
-        resultado[1] = lng;
-
-        return resultado;
-    }
     
     /**
      * Genera lugar aleatorios a lo largo de Cartago con peso en aristas
      */
-    public void generateThirtyRandomPlaces() {
+    public void generateRandomPlaces() {
     	vertexes = new ArrayList<Vertex>();
     	edges = new ArrayList<Edge>();
     	
-    	for(int i = 1; i<30;i++) {
-    		double[] aux = generateRandomPos();
-			Vertex location = new Vertex("Node_"+i, "Node_"+i, aux[0], aux[1]);
+    	for(int i = 1; i<10;i++) {
+			Vertex location = new Vertex("Node_"+i, "Node_"+i, Mapa.nodos.get(i).getPos_x(), Mapa.nodos.get(i).getPos_y(),Mapa.nodos.get(i).getPeso());
 			vertexes.add(location);
 		}
-    	Vertex TEC = new Vertex("TEC", "Node_TEC: " + 30, 9.857191, -83.912284);
-    	vertexes.add(TEC);
+    	Vertex Salida = new Vertex("Salida", "Node_Salida: " ,10, 72,1);
+    	vertexes.add(Salida);
     	
-    	
-    	for(int i=0; i<vertexes.size()-1;i++) {
-    		Random randint = new Random();
-    		addLane("Edge_"+i, i, i+1,randint.nextInt((10-1)+1)+1, vertexes, edges);
-    	}
-    	
-    	int counter = vertexes.size();
-    	
-    	for(int i=0; i<vertexes.size(); i++) {
-    		Random randint = new Random();
-    		Random randint2 = new Random();
-    		Random randint3 = new Random();
-    		addLane("Edge_"+ counter, randint.nextInt((29-1)+1)+1, randint2.nextInt((29-1)+1)+1, randint3.nextInt((10-1)+1)+1, vertexes,edges);
-    		counter+=1;
+    	for(int i=0; i<10; i++) {
+    		int random = (int) (Math.random() *10);
+			int random2 = (int) (Math.random() *10 );
+    		addLane("Edge_"+ i, random, random2, vertexes,edges);
     	}
     	
     }
@@ -92,12 +67,31 @@ public class Graph {
      * @param nodes
      * @param edges
      */
-    public static void addLane(String laneId, int sourceLocNo, int destLocNo, int duration, List<Vertex> nodes , List<Edge> edges) {
-		Edge lane = new Edge(laneId,nodes.get(sourceLocNo), nodes.get(destLocNo), duration );
+    public static void addLane(String laneId, int sourceLocNo, int destLocNo, List<Vertex> vertex , List<Edge> edges) {
+    	int cambio_y=Math.abs((int) (vertex.get(sourceLocNo).getY()-vertex.get(destLocNo).getY()));
+    	int cambio_x=Math.abs((int) (vertex.get(sourceLocNo).getX()-vertex.get(destLocNo).getX()));
+    	double suma_cuadrados = Math.pow(cambio_y, 2)+Math.pow(cambio_x, 2);
+    	int peso =  (int) Math.sqrt(suma_cuadrados);
+    	if (vertex.get(destLocNo).getPeso() == 0) {
+    		peso+= 500;
+    	}else {
+    		if(vertex.get(destLocNo).getPeso() == vertex.get(sourceLocNo).getPeso()) {
+        		peso+= 100;
+        	}else {
+        		peso+= 300;
+        	}
+    	}
+		Edge lane = new Edge(laneId,vertex.get(sourceLocNo), vertex.get(destLocNo), peso/2 );
 		edges.add(lane);
+	}
+    
+    @Override
+	public String toString() {
+		return vertexes.toString() + edges.toString();
 	}
     
     
     
 
 }
+ 

@@ -3,8 +3,9 @@ package grafos;
 public class Vertex {
 	final private String id;
 	final private String name;
-	final private double lat;
-	final private double lon;
+	final private int x;
+	final private int y;
+	final private int peso;
 
 	/**
 	 * Constructor de la clase vertice
@@ -13,11 +14,15 @@ public class Vertex {
 	 * @param lat
 	 * @param lon
 	 */
-	public Vertex(String id, String name, double lat, double lon) {
+	public Vertex(String id, String name, int x, int y,int peso) {
 		this.id = id;
 		this.name = name;
-		this.lat = lat;
-		this.lon = lon;
+		this.x = x;
+		this.y = y;
+		this.peso = peso;
+	}
+	public int getPeso() {
+		return peso;
 	}
 	public String getId() {
 		return id;
@@ -27,11 +32,11 @@ public class Vertex {
 		return name;
 	}
 	
-	public double getLat() {
-		return lat;
+	public double getX() {
+		return x;
 	}
-	public double getLon() {
-		return lon;
+	public double getY() {
+		return y;
 	}
 	@Override
 	public int hashCode() {
